@@ -16,7 +16,7 @@ body {
   align-items: center;
 }
 
-#container {
+#keys {
   display: flex;
   flex: 1;
   justify-content: space-around;
