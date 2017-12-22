@@ -21,17 +21,17 @@ body {
   position: absolute;
 }
 
-#hours {
+.hours {
   background-color: black;
   transform: rotate(90deg);
 }
 
-#minutes {
+.minutes {
   background-color: bisque;
   transform: rotate(120deg);
 }
 
-#seconds {
+.seconds {
   background-color: brown;
   transform: rotate(0deg);
 }
