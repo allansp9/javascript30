@@ -1,54 +1,44 @@
 const endpoint =
-  "https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json";
+  'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
-let cities = [];
-
+let cityArray = [];
 (async function fetchAsync() {
   const response = await fetch(endpoint);
-  cities = await response.json();
-})();
+  cityArray = await response.json();
+}());
 
 function findMatches(word, cities) {
   return cities.filter(place => {
-    const regex = new RegExp(word, "gi");
+    const regex = new RegExp(word, 'gi');
     return place.city.match(regex) || place.state.match(regex);
   });
 }
 
 function numberWithCommas(x) {
-  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
 
 function displayMatches() {
-  const matchArray = findMatches(this.value, cities);
+  const matchArray = findMatches(this.value, cityArray);
   const html = matchArray
     .map(place => {
-      const regex = new RegExp(this.value, "gi");
-      const cityName = place.city.replace(
-        regex,
-        `<span class="hl">${this.value}</span>`
-      );
-      const stateName = place.state.replace(
-        regex,
-        `<span class="hl">${this.value}</span>`
-      );
+      const regex = new RegExp(this.value, 'gi');
+      const cityName = place.city.replace(regex, `<span class="hl">${this.value}</span>`);
+      const stateName = place.state.replace(regex, `<span class="hl">${this.value}</span>`);
       return `
       <li>
         <span className="name">
           ${cityName}, ${stateName}
         </span>
-        <span className="population">${numberWithCommas(
-          place.population
-        )}</span>
+        <span className="population">${numberWithCommas(place.population)}</span>
       </li>`;
     })
-    .join("");
+    .join('');
 
   suggestions.innerHTML = html;
 }
 
-const searchInput = document.querySelector(".search");
-const suggestions = document.querySelector(".suggestions");
-
-searchInput.addEventListener("change", displayMatches);
-searchInput.addEventListener("keyup", displayMatches);
+searchInput.addEventListener('change', displayMatches);
+searchInput.addEventListener('keyup', displayMatches);

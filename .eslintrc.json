@@ -1,3 +1,10 @@
 {
-    "extends": "standard"
+  "extends": "airbnb-base/legacy",
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+  "rules": {
+    "linebreak-style": ["error", "windows"]
+  }
 }
